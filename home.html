@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+</head>
+<body>
+    <!-- http://127.0.0.1:3000/pop?city=城市名稱 -->
+    <h3>查詢城市人口</h3>
+    <div>
+        城市名稱<input type="text" id="city"/><br/>
+        <button onclick="getData();">查詢</button>
+        <div id="result"></div>
+    </div>
+    <script>
+        //AJAX/XHR 的技巧
+        function getData(){
+            //fetch(網址).then(取得回應後的處理函式);
+            let name=document.getElementById("city").value;//value=使用者輸入的內容
+            let src="http://127.0.0.1:3000/pop?city="+name;
+            fetch(src).then(function(response){
+                return response.text();
+            }).then(function(text){
+                let result=document.getElementById("result");
+                result.innerHTML=text;
+            });
+        }
+    </script>
+    <!--
+    <form action="http://127.0.0.1:3000/pop">
+        城市名稱<input type="text" name="city" /><br/>    
+        <button>查詢</button>
+    </form>
+    -->
+</body>
+</html>
